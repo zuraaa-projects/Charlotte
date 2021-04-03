@@ -21,7 +21,7 @@ export default class {
 
   async getUser (id: string): Promise<IUsers> {
     try {
-      const response = await this._api.get('bots/' + id)
+      const response = await this._api.get('users/' + id)
       return response.data
     } catch (err) {
       throw this._sendThow(err)
