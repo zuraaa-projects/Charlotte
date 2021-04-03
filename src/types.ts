@@ -39,3 +39,23 @@ export interface IBotsVotes {
   current: number
   voteslog: string[]
 }
+
+export interface IUsers {
+  _id: string
+  username: string
+  discriminator: string
+  avatar: string
+  dates: IUsersDates
+  details: IUsersDetails
+}
+
+export interface IUsersDates {
+  nextVote: Date | null
+  lastBotAdd: Date | null
+  firstSeen: Date
+}
+
+export interface IUsersDetails {
+  description: StringNullable
+  customURL: StringNullable
+}
