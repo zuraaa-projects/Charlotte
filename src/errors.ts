@@ -1,4 +1,4 @@
-export type GenericErrorType = 'responseAxiosNotReceived' | 'unknown'
+export type GenericErrorType = 'responseAxiosNotReceived' | 'unknown' | 'webhookUnauthorized'
 
 export class CharlotteRestError extends Error {
   readonly code: number
