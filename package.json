@@ -1,5 +1,5 @@
 {
-  "name": "@zuraaa/charlotte",
+  "name": "@zuraaa-projects/charlotte",
   "version": "1.0.0",
   "description": "Apenas um wrapper para Zuraaa criado em JavaScript com Typescript.",
   "main": "dist/index.js",
