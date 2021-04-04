@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "charlotte"
+    "url": "https://github.com/zuraaa-projects/Charlotte.git"
   },
   "files": [
     "./dist"
