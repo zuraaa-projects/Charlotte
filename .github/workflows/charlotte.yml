@@ -11,7 +11,6 @@ on:
 jobs:
   charlotte:
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -20,6 +19,9 @@ jobs:
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@main
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@zuraaa'
 
       - name: Setup node env 🏗
         uses: actions/setup-node@v2.1.5
@@ -30,5 +32,9 @@ jobs:
         run: npm i
       - name: Run Linter ✏️
         run: npm run lint
-      - name: Run Builder 🥞
+      - name: Run build
         run: npm run build
+      - name: Run publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
