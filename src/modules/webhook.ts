@@ -3,6 +3,7 @@ import { v4 as publicIpv4 } from 'public-ip'
 import { CharlotteGenericError } from '../errors'
 import helmet from 'helmet'
 import Events from '../events'
+import { IWebhook } from '../types'
 
 export type EventsNames = 'vote'
 
@@ -37,11 +38,11 @@ export default class extends Events {
     this._auth = auth
   }
 
-  on (type: EventsNames, callback: (data: any) => void): void {
+  on (type: EventsNames, callback: (data: IWebhook) => void): void {
     super.on(type, callback)
   }
 
-  emit (type: EventsNames, data: any): void {
+  emit (type: EventsNames, data: IWebhook): void {
     super.emit(type, data)
   }
 

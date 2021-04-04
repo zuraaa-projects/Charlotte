@@ -59,3 +59,14 @@ export interface IUsersDetails {
   description: StringNullable
   customURL: StringNullable
 }
+
+export interface IWebhook {
+  type: 'vote' | 'vote_test'
+  data: IWebhookVote
+}
+
+export interface IWebhookVote {
+  user_id: string
+  bot_id: string
+  votes: number
+}
