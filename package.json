@@ -1,5 +1,5 @@
 {
-  "name": "charlotte",
+  "name": "@zuraaa/charlotte",
   "version": "1.0.0",
   "description": "Apenas um wrapper para Zuraaa criado em JavaScript com Typescript.",
   "main": "dist/index.js",
@@ -21,7 +21,7 @@
     "rest",
     "api"
   ],
-  "author": "Takasakiii",
+  "author": "Zuraaa",
   "license": "MIT",
   "devDependencies": {
     "@types/axios": "^0.14.0",
