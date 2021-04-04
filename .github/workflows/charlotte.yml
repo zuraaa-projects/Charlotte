@@ -3,10 +3,10 @@ name: charlotte
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   charlotte:
@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout 🛎
-        uses: actions/checkout@master
+        uses: actions/checkout@main
 
       - name: Setup node env 🏗
         uses: actions/setup-node@v2.1.5
