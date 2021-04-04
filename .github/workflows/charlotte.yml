@@ -19,9 +19,6 @@ jobs:
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@main
-        with:
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@zuraaa'
 
       - name: Setup node env 🏗
         uses: actions/setup-node@v2.1.5
@@ -36,5 +33,8 @@ jobs:
         run: npm run build
       - name: Run publish
         run: npm publish
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@zuraaa-projects'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
