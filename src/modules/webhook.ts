@@ -11,6 +11,7 @@ export interface WebHookConfig {
   port?: number
   endpoint?: string
   auth?: string
+  customExpress?: Express
 }
 
 export default class extends Events {
@@ -20,10 +21,17 @@ export default class extends Events {
   private readonly _auth?: string
   constructor (config: WebHookConfig) {
     super()
-    this._app = express()
     if (config === undefined) {
       config = {}
     }
+    if (config.customExpress === undefined) {
+      this._app = express()
+      this._app.use(helmet())
+      this._app.use(express.json())
+    } else {
+      this._app = config.customExpress
+    }
+
     if (config.port === undefined) {
       this._port = 8080
     } else {
@@ -50,9 +58,6 @@ export default class extends Events {
   }
 
   start (): void {
-    this._app.use(helmet())
-    this._app.use(express.json())
-
     this._app.post(this._endpoint, (req, res) => {
       if (this._auth !== undefined) {
         if (req.headers.authorization !== this._auth) {
