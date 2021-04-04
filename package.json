@@ -2,15 +2,15 @@
   "name": "@zuraaa-projects/charlotte",
   "version": "1.0.0",
   "description": "Apenas um wrapper para Zuraaa criado em JavaScript com Typescript.",
-  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/zuraaa-projects/Charlotte.git"
   },
   "files": [
-    "./dist"
+    "dist/"
   ],
+  "main": "dist/index.js",
   "keywords": [
     "zuraaa",
     "zuraaa.com",
