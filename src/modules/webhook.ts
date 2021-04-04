@@ -6,19 +6,34 @@ import Events from '../events'
 
 export type EventsNames = 'vote'
 
+export interface WebHookConfig {
+  port?: number
+  endpoint?: string
+  auth?: string
+}
+
 export default class extends Events {
   private readonly _app: Express
   private readonly _port: number
   private readonly _endpoint: string
   private readonly _auth?: string
-  constructor (port: number = 8080, endpoint: string = 'webhook', auth?: string) {
+  constructor ({ port, endpoint, auth }: WebHookConfig) {
     super()
     this._app = express()
-    this._port = port
-    if (!endpoint.startsWith('/')) {
-      endpoint = '/' + endpoint
+    if (port === undefined) {
+      this._port = 8080
+    } else {
+      this._port = port
     }
-    this._endpoint = endpoint
+
+    if (endpoint === undefined) {
+      this._endpoint = 'webhook'
+    } else {
+      this._endpoint = endpoint
+    }
+    if (!this._endpoint.startsWith('/')) {
+      this._endpoint = '/' + this._endpoint
+    }
     this._auth = auth
   }
 
@@ -37,6 +52,7 @@ export default class extends Events {
     this._app.post(this._endpoint, (req, res) => {
       if (this._auth !== undefined) {
         if (req.headers.authorization !== this._auth) {
+          res.sendStatus(401)
           throw new CharlotteGenericError('webhookUnauthorized', `Provided token: ${req.headers.authorization ?? ''}`)
         }
       }
