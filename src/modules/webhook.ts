@@ -18,24 +18,27 @@ export default class extends Events {
   private readonly _port: number
   private readonly _endpoint: string
   private readonly _auth?: string
-  constructor ({ port, endpoint, auth }: WebHookConfig) {
+  constructor (config: WebHookConfig) {
     super()
     this._app = express()
-    if (port === undefined) {
+    if (config === undefined) {
+      config = {}
+    }
+    if (config.port === undefined) {
       this._port = 8080
     } else {
-      this._port = port
+      this._port = config.port
     }
 
-    if (endpoint === undefined) {
+    if (config.endpoint === undefined) {
       this._endpoint = 'webhook'
     } else {
-      this._endpoint = endpoint
+      this._endpoint = config.endpoint
     }
     if (!this._endpoint.startsWith('/')) {
       this._endpoint = '/' + this._endpoint
     }
-    this._auth = auth
+    this._auth = config.auth
   }
 
   on (type: EventsNames, callback: (data: IWebhook) => void): void {
