@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  zuraaa:
+  charlotte:
     runs-on: ${{ matrix.os }}
 
     strategy:
