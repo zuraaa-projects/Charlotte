@@ -27,7 +27,7 @@ apiRest.getUser('id do usuario')
   .catch(console.err)
 ```
 
- - WebSocket
+ - WebHook
  ```js
  const { ZuraaaWebHook } = require('@zuraaa-projects/charlotte')
 
