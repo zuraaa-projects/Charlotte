@@ -1,6 +1,6 @@
 {
   "name": "@zuraaa-projects/charlotte",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Apenas um wrapper para Zuraaa criado em JavaScript com Typescript.",
   "types": "dist/index.d.ts",
   "repository": {
