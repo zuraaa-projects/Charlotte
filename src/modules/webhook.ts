@@ -2,29 +2,29 @@ import express, { Express } from 'express'
 import { v4 as publicIpv4 } from 'public-ip'
 import { CharlotteGenericError } from '../errors'
 import helmet from 'helmet'
-import Events from '../events'
+import { EventEmitter } from 'events'
 import { IWebhook } from '../types'
 
 export type EventsNames = 'vote'
 
 export interface WebHookConfig {
-  port?: number
-  endpoint?: string
-  auth?: string
-  customExpress?: Express
+  port?: number | null
+  endpoint?: string | null
+  auth?: string | null
+  customExpress?: Express | null
 }
 
-export default class extends Events {
+export default class extends EventEmitter {
   private readonly _app: Express
   private readonly _port: number
   private readonly _endpoint: string
-  private readonly _auth?: string
-  constructor (config: WebHookConfig) {
+  private readonly _auth?: string | null
+  constructor (config?: WebHookConfig) {
     super()
-    if (config === undefined) {
+    if (config == null) {
       config = {}
     }
-    if (config.customExpress === undefined) {
+    if (config.customExpress == null) {
       this._app = express()
       this._app.use(helmet())
       this._app.use(express.json())
@@ -32,13 +32,13 @@ export default class extends Events {
       this._app = config.customExpress
     }
 
-    if (config.port === undefined) {
+    if (config.port == null) {
       this._port = 8080
     } else {
       this._port = config.port
     }
 
-    if (config.endpoint === undefined) {
+    if (config.endpoint == null) {
       this._endpoint = 'webhook'
     } else {
       this._endpoint = config.endpoint
@@ -49,17 +49,17 @@ export default class extends Events {
     this._auth = config.auth
   }
 
-  on (type: EventsNames, callback: (data: IWebhook) => void): void {
-    super.on(type, callback)
+  on (type: EventsNames, callback: (data: IWebhook) => void): this {
+    return super.on(type, callback)
   }
 
-  emit (type: EventsNames, data: IWebhook): void {
-    super.emit(type, data)
+  emit (type: EventsNames, data: IWebhook): boolean {
+    return super.emit(type, data)
   }
 
   start (): void {
     this._app.post(this._endpoint, (req, res) => {
-      if (this._auth !== undefined) {
+      if (this._auth != null) {
         if (req.headers.authorization !== this._auth) {
           res.sendStatus(401)
           throw new CharlotteGenericError('webhookUnauthorized', `Provided token: ${req.headers.authorization ?? ''}`)

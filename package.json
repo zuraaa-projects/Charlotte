@@ -1,6 +1,6 @@
 {
   "name": "@zuraaa-projects/charlotte",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Apenas um wrapper para Zuraaa criado em JavaScript com Typescript.",
   "types": "dist/index.d.ts",
   "repository": {
@@ -41,6 +41,9 @@
     "express": "^4.17.1",
     "helmet": "^4.4.1",
     "public-ip": "^4.0.3"
+  },
+  "engines": {
+    "node": ">=12"
   },
   "scripts": {
     "lint": "eslint --ext .ts",
